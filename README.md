@@ -36,6 +36,7 @@ Data preprocessing steps are documented in the Jupyter notebooks located in the 
 
 Machine learning models used for text classification, including:
 
+- USE (Universal Sentence Encoder)
 - BERT (Bidirectional Encoder Representations from Transformers)
 - XGBoost
 - LSTM (Long Short-Term Memory networks)
