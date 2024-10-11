@@ -22,6 +22,6 @@ def clean_text(text):
 def clean_data(df):
     df['Map Data'] = df['Map Data'].fillna('')
     df = df[df['Map Data'].str.len() > 0]
-    df = df[df['Map Data'].str.len() < 5000]
+    df = df[df['Map Data'].str.len() < 10000]
     # df['Map Data'] = df['Map Data'].apply(clean_text)
     return df

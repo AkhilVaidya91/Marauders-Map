@@ -1,9 +1,10 @@
 ######################################## IMPORTING REQUIRED LIBRARIES ####################################
 import os
 import sys
+import pandas as pd
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 data_folder = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'data')
-from utilities import get_data, input_filter, clean_data
+from utilities import get_data, input_filter, clean_data, autogenerate_labels
 
 
 ################################################## INPUTS ################################################
@@ -26,8 +27,15 @@ def data_clean_for_training(df):
 
 if __name__ == '__main__':
 
-    df = data_sourcing() ## testing the data sourcing endpoint
-    if df:
-        print("Data loaded successfully !!")
+    # df = data_sourcing() ## testing the data sourcing endpoint
+    # if df:
+    #     print("Data loaded successfully !!")
 
-    clean_df = data_clean_for_training(df)
+    # clean_df = data_clean_for_training(df)
+
+    df = pd.read_csv(f'{data_folder}/MMR_DATA.csv')
+    df = clean_data(df)
+    labelled_df, embeddings_df = autogenerate_labels(df)
+
+    labelled_df.to_csv(f'{data_folder}/MMR_DATA_CLEAN_LABELLED.csv', index=False)
+    embeddings_df.to_csv(f'{data_folder}/MMR_CLEAN_EMBEDDINGS.csv', index=False)
