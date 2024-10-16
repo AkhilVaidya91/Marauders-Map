@@ -9,11 +9,11 @@ from utilities import get_data, input_filter, clean_data, autogenerate_labels
 
 ################################################## INPUTS ################################################
 
-left_lat = 18.889833
-left_lon = 72.779844
-dist = 35
+# left_lat = 18.889833
+# left_lon = 72.779844
+# dist = 35
 
-def data_sourcing():
+def data_sourcing(left_lat, left_lon, dist):
     lat, lon = input_filter(lat = left_lat, lon=left_lon)
     df = get_data(lat, lon, dist)
     df.to_csv(f'{data_folder}/MMR_DATA.csv', index=False)

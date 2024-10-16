@@ -168,9 +168,9 @@ def create_map_grid(bottom_left: Tuple[float, float], top_right: Tuple[float, fl
 
 ## entire pipeline
 
-left_lat = 18.889833
-left_lon = 72.779844
-dist = 35
+# left_lat = 18.889833
+# left_lon = 72.779844
+# dist = 35
 
 def input_filter(lat=None, lon=None, string=None):
     if lat != None:
@@ -187,7 +187,7 @@ def get_data(bottom_left_lat, bottom_left_lon, dist):
 
     top_right_lat = result[1][0]
     top_right_lon = result[0][1]
-    grid = create_map_grid((left_lat, left_lon), (top_right_lat, top_right_lon), dist, dist)
+    grid = create_map_grid((bottom_left_lat, bottom_left_lon), (top_right_lat, top_right_lon), dist, dist)
 
     grid_dataset = []
     for i, row in enumerate(grid):
