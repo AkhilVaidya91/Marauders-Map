@@ -1,3 +1,14 @@
+---
+title: Map-Data
+emoji: 📊
+colorFrom: green
+colorTo: indigo
+sdk: streamlit
+sdk_version: 1.39.0
+app_file: src/app.py
+pinned: false
+license: mit
+---
 # High Fidelity Functional Map Generation for Industrial-Commercial-Residential Areas and Cluster Identification using Map Text Data Classification
 
 ## Project Overview
