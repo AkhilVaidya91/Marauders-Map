@@ -27,7 +27,7 @@ loc_name = st.text_input("Enter the location name", value="Mumbai")
 dist = st.number_input("Enter the distance", value=35)
 
 if st.button("Run ETL Pipeline"):
-    df = data_sourcing(left_lat, left_lon, dist)
+    df = data_sourcing(left_lat, left_lon, dist, loc_name)
     if df:
         st.write("Data loaded successfully !!")
 
