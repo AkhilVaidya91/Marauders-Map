@@ -1,0 +1,29 @@
+title - Automated/High Fidelity Functional Map Generation using Text Data Clustering
+
+abstract
+
+keywords
+
+introduction
+
+literature review
+
+methodology
+
+1. data sourcing
+2. data filtering
+3. square tiles generation
+4. example use cases - define regions
+5. data description - EDA
+6. embeddings - TFIDF, USE, Sentence Transformers (3 4 models)
+7. clustering - knee/elbow point
+8. 3D visual representation
+9. auto labelling and comparison with manual coded values
+
+results
+
+1. evaluation metrics
+2. visual cluster evaluation
+3. classification accuracy
+
+conclusion
