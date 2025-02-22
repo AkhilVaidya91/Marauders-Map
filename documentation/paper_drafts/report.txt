@@ -1,8 +1,13 @@
-title - Automated/High Fidelity Functional Map Generation using Text Data Clustering
+title - Automated High Fidelity Functional Map Generation using Text Data Clustering
 
 abstract
 
-keywords
+This study presents a novel methodology for automating the generation of high-fidelity functional maps using text-based clustering of OpenStreetMap data. Functional maps, which visualize the distribution of residential, commercial, industrial, and natural zones within regions, traditionally require extensive manual effort through field surveys, data compilation, and cartographic work. While Geographic Information Systems (GIS) have streamlined this process, significant manual verification is still needed for accuracy.
+We propose an automated framework that processes OpenStreetMap text data through Natural Language Processing (NLP) techniques to classify regional land use. Our methodology divides target regions into 1km² tiles and analyzes the associated map text data (including building names, shop names, and point-of-interest descriptions) using the Universal Sentence Encoder (USE) for text embedding. These embeddings are then clustered using the K-means algorithm to identify distinct functional zones.
+To validate our approach, we applied this framework to a 2,500 km² area within the Mumbai Metropolitan Region. The region was first manually labeled to establish ground truth data, against which we compared our automated classifications. Our results demonstrate that this methodology can effectively generate functional maps while significantly reducing manual effort. The framework's scalability makes it particularly valuable for mapping large urban areas, achieving promising accuracy, precision, recall, and F1 scores in distinguishing between residential, commercial, industrial, and natural zones.
+
+Keywords: functional maps, text embedding, K-means clustering, OpenStreetMap, urban planning, automated mapping
+
 
 introduction
 
@@ -10,15 +15,103 @@ literature review
 
 methodology
 
-1. data sourcing
-2. data filtering
-3. square tiles generation
-4. example use cases - define regions
-5. data description - EDA
+1. OpenStreetMap Data Collection
+This study utilizes OpenStreetMap (OSM) as its primary data source. OSM is a collaborative mapping platform that provides comprehensive geographic data through community contributions, functioning similarly to Wikipedia for geographic information. The platform offers detailed spatial data including:
+
+Building information and classifications
+Commercial establishments and points of interest
+Road networks and transportation infrastructure
+Land use designations
+Natural features and boundaries
+
+The data is freely accessible through the OSM API, which provides structured information in a standardized format. OSM's data quality is maintained through community verification processes, making it particularly reliable in densely populated urban areas where contributor activity is high.
+
+2. Spatial Grid Generation and Region Partitioning
+To systematically analyze large geographic areas, we developed a grid-based partitioning approach:
+
+Grid Definition: The target region is overlaid with a uniform grid system, where each cell represents a 1km × 1km area. This granularity was chosen to:
+
+Capture sufficient detail for meaningful functional analysis
+Maintain computational efficiency
+
+Data Association:
+OSM features falling within each tile's boundaries are extracted
+Spatial indices are created to optimize the feature-to-tile mapping process
+Each tile accumulates all relevant text data from its contained features
+
+This structured approach to data collection and spatial partitioning provides the foundation for subsequent text processing and clustering analyses. The uniform grid system ensures consistent spatial resolution across the study area while facilitating scalable processing of large geographic regions.
+
+3. Data Preprocessing and Text Analysis
+
+The raw data extracted from the OpenStreetMap API underwent a comprehensive filtering and preprocessing pipeline to ensure data quality and relevance. Initial filtering was performed using predefined OSM database filters to retain only pertinent geographic features, including buildings, commercial establishments, offices, transportation infrastructure, and recreational areas. This selective approach helped maintain focus on features that contribute meaningfully to functional zone classification while reducing noise in the dataset.
+Following the initial feature selection, text data from each 1km² tile was aggregated to create consolidated text chunks representing the geographic characteristics of each region. The consolidation process preserved essential geographic nomenclature while maintaining the spatial relationships between features within each tile. To ensure data quality and identify potential anomalies, we conducted extensive exploratory data analysis (EDA) using statistical methods. Box plots were employed to analyze the quartile distribution of text lengths across tiles, enabling the identification of outliers and unusual patterns in the data distribution.
+Regions lacking text data were subjected to additional verification processes. These void areas were systematically revalidated through cross-referencing with satellite imagery and existing land use data, leading to the identification of natural features such as mangroves and water bodies. This verification process helped distinguish between actual data gaps and legitimate natural areas, improving the overall accuracy of our classification framework.
+The text preprocessing pipeline incorporated the Natural Language Toolkit (NLTK) for comprehensive text cleaning and normalization. This process included the removal of stopwords, lemmatization of terms, and standardization of text format. The lemmatization process was particularly crucial as it reduced inflected words to their base form, ensuring consistent representation of similar features across different tiles. Additionally, we analyzed the binned distribution of text lengths to establish appropriate thresholds for outlier exclusion, ensuring that the final dataset maintained a balance between comprehensive coverage and data quality.
+Through this systematic approach to data filtering and preprocessing, we established a robust foundation for subsequent embedding and clustering analyses. The careful attention to data quality and feature relevance during this stage significantly contributed to the effectiveness of our functional zone classification methodology.
+
+4. Case Study Implementation
+To validate our methodological framework, we selected the Mumbai Metropolitan Region (MMR) as our primary study area. This region presents an ideal test case due to its diverse urban landscape, encompassing a rich mixture of land use patterns across a substantial geographic area of 2,500 square kilometers.
+Study Area Selection and Characteristics
+The MMR serves as an exemplary urban testing ground for our framework due to several key characteristics. The region features a complex tapestry of land use, including high-density commercial districts, extensive residential developments, established industrial zones, and significant natural features such as the Arabian Sea coastline, creeks, and mangrove forests. This diversity provides an optimal environment for testing our classification methodology across various functional zones.
+The study area was defined as a 50km × 50km square region, centered on the metropolitan core. This delineation was carefully chosen to capture the full spectrum of urban development patterns, from the dense urban core to peripheral areas experiencing rapid transformation. The selected region also includes various stages of urban development, from historical neighborhoods to emerging commercial corridors and industrial estates.
+Implementation Framework
+Following our established methodology, we partitioned the study area into 1km × 1km tiles, generating a dataset of 2,500 distinct spatial units. This resolution was selected to:
+
+Maintain sufficient granularity for meaningful functional analysis
+Capture local variations in land use patterns
+Enable efficient computational processing
+Facilitate practical validation of results
+
+During the exploratory data analysis phase, we identified and addressed several key considerations specific to the MMR context. Tiles containing no text data were subjected to additional verification, particularly in coastal areas and regions containing large natural features. This process helped distinguish between data gaps and legitimate natural areas, enhancing the accuracy of our classification system.
+The MMR case study provided an ideal opportunity to test our framework's ability to handle complex urban environments. The region's varied development patterns, mixed land uses, and distinct natural boundaries offered appropriate challenges for validating our automated classification methodology. The results from this implementation served as the foundation for our subsequent accuracy assessments and methodology validation.
+
+
+5. data description - EDA (elaboarate on the EDA part of the use case)
+The exploratory data analysis phase revealed crucial insights about the textual characteristics and spatial distribution patterns across the Mumbai Metropolitan Region study area. Our analysis focused on understanding the distribution of text data across tiles and identifying patterns that could influence the classification process.
+Text Length Distribution Analysis
+Initial analysis of text length distribution across the 2,500 tiles revealed significant variations in data density. A box plot analysis (Figure X) demonstrated that the majority of tiles (over 75%) contained between 50 and 1100 characters of preprocessed text, with a median length of approximately 192 characters and mean having 592 characters. The distribution exhibited strong positive skewness, indicating the presence of tiles with exceptionally high text content, typically corresponding to densely developed urban areas.
+The quartile analysis identified several outliers, particularly in the upper range, where some tiles contained more than 1200 characters. These outliers primarily represented central business districts and major commercial zones, characterized by high concentrations of labeled buildings and points of interest. Conversely, tiles with minimal text content (below the lower quartile of 50 characters) often corresponded to natural areas or regions with limited development.
+
+Void Analysis and Verification
+Approximately 15% of tiles contained no text data, upon further investigation, it was found that these regions mainly belonged to:
+
+Water bodies (arabian sea and thane/vasai creek)
+Protected mangrove areas
+Undeveloped land parcels
+
+Text Content Analysis
+A frequency analysis of key terms and phrases across tiles provided insights into the characteristic vocabulary associated with different functional zones:
+
+Commercial zones showed high frequencies of terms related to retail, offices, and services
+Residential areas were characterized by apartment complexes, housing societies, and community facilities
+Industrial zones displayed consistent patterns of manufacturing, warehouse, and logistics-related terminology
+Natural areas were identified through references to parks, forests, and water bodies
+
+Preprocessing Impact Assessment
+The effect of text preprocessing steps was quantified through comparative analysis. Lemmatization reduced the unique token count by approximately 5%, while stopword removal decreased the total token count by 28%. These reductions improved the signal-to-noise ratio in the data while preserving essential semantic information for classification.
+This exploratory analysis provided essential insights that informed subsequent choices in our embedding and clustering methodology, particularly in handling outliers and setting appropriate thresholds for classification.
+
+
 6. embeddings - TFIDF, USE, Sentence Transformers (3 4 models)
+Text embedding is a technique that converts words, sentences, or documents into numerical vectors (sequences of numbers) that capture their semantic meaning. These vectors allow machines to understand and compare text mathematically - similar texts will have similar vector representations. This is fundamental for many NLP applications like search, recommendation systems, and text classification.
+Text embeddings transform text into numerical representations to capture semantic meaning. Traditional methods like TF-IDF (Term Frequency-Inverse Document Frequency) create sparse vectors based on word frequency, but they fail to understand context. In contrast, transformer-based embeddings generate dense, context-aware representations using deep learning. Notable models include Universal Sentence Encoder (USE) by Google, which provides efficient sentence embeddings for NLP tasks, and Sentence-Transformers (all-MiniLM-L6-v2).
+For the purpose of generating text embedding, three mehtods were chosen - tfidf, USE and sentence transformer.
+
 7. clustering - knee/elbow point
+K-Means – A popular centroid-based method that partitions embeddings into M clusters by minimizing intra-cluster variance. Efficient for large datasets but assumes clusters are spherical.
+DBSCAN (Density-Based Spatial Clustering of Applications with Noise) – Groups embeddings based on density, identifying arbitrary-shaped clusters while marking outliers. Works well for non-uniform distributions but requires fine-tuning of hyperparameters.
+HDBSCAN (Hierarchical DBSCAN) – An improvement over DBSCAN that adapts to varying density levels, making it effective for embeddings with different cluster densities.
+
+the elbow point detection method was used to identify the optimal k value in KMeans clustring. The Elbow Method is a technique for determining the optimal number of clusters (K) in K-Means clustering by analyzing the within-cluster sum of squares (WCSS), which measures how tightly data points are grouped within each cluster. As K increases, WCSS decreases because clusters become smaller and more refined. However, beyond a certain point, adding more clusters results in minimal improvement while increasing model complexity. By plotting WCSS against different values of K, an "elbow" shape typically appears, where the curve sharply bends before flattening out. The optimal K is chosen at this elbow point, as it represents the best balance between compact clusters and computational efficiency.
+
 8. 3D visual representation
+t-SNE (t-Distributed Stochastic Neighbor Embedding) is a dimensionality reduction technique commonly used for visualizing high-dimensional data in a lower-dimensional space (typically 2D or 3D). It preserves the local structure of data by converting pairwise similarities into probabilities, ensuring that similar points in high-dimensional space remain close in the lower-dimensional representation. 
+UMAP (Uniform Manifold Approximation and Projection) is a non-linear dimensionality reduction technique designed for preserving both the local and global structure of high-dimensional data while being computationally efficient. Unlike t-SNE, which focuses primarily on local neighborhood preservation, UMAP constructs a graph-based representation of the data and optimizes a low-dimensional embedding using a probabilistic framework.
+these two methods were used to visualise the embeddings and the clusters generated to evaluate the quality of the differnt embedding approaches.
+
 9. auto labelling and comparison with manual coded values
+the clusters generates were used to label the data points into groups. 10% samples from each cluster were manually evaluated based on their text content, to map the cluster to either comm, res, indus or nat. this method effectively genrates a classification frameowrk for unalbelled data based on clustring.
+these auto generated labels were then comapred with the manually coded ground truth values, to identify the accuracy and other metrics as a classification framework.
 
 results
 
