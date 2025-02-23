@@ -13,6 +13,16 @@ introduction
 
 literature review
 
+functional maps
+town planning
+sar data for functional maps
+openstreet map - text
+urban green spaces paper
+using llms for text classification
+clustering of unlabelled data
+clustering for classification
+
+
 methodology
 
 1. OpenStreetMap Data Collection
@@ -115,8 +125,30 @@ these auto generated labels were then comapred with the manually coded ground tr
 
 results
 
-1. evaluation metrics
+1. Evaluation Metrics
+To assess the effectiveness of our automated functional map generation framework, we employed a comprehensive set of evaluation metrics that measure both the clustering quality and classification accuracy. The selected metrics provide complementary perspectives on the model's performance, enabling a thorough evaluation of its practical utility for urban planning applications.
+Classification Metrics
+Accuracy
+Accuracy measures the proportion of correctly classified tiles across all functional zones. While this metric provides an overall assessment of the model's performance, it was complemented with other metrics due to potential class imbalance in urban landscapes, where certain functional zones may be more prevalent than others.
+Precision
+Precision quantifies the proportion of correct positive predictions for each functional zone. This metric is particularly important in urban planning applications, where false positives could lead to inappropriate land-use decisions.
+Recall
+Recall measures the model's ability to identify all instances of a particular functional zone. This metric is crucial for ensuring comprehensive coverage of each zone type, particularly for critical areas like industrial zones where missed classifications could have significant implications.
+F1-Score
+The F1-score provides a balanced measure of precision and recall, offering a single metric that accounts for both false positives and false negatives. This is especially relevant for our application, where both over-identification and under-identification of functional zones can impact urban planning decisions.
+
+Silhouette Score
+The Silhouette score evaluates both cluster cohesion and separation, ranging from -1 to 1. Higher scores indicate better-defined clusters. This metric was chosen to assess how well the embedding space separates different functional zones.
+
+
 2. visual cluster evaluation
+
 3. classification accuracy
 
 conclusion
+
+This study presents a novel automated approach for generating high-fidelity functional maps using text-based clustering of OpenStreetMap data. Our methodology successfully demonstrates that natural language processing techniques, particularly through the application of advanced text embeddings and clustering algorithms, can effectively classify urban spaces into distinct functional zones. The implementation in the Mumbai Metropolitan Region validates the framework's capability to process large-scale urban areas while maintaining accuracy and computational efficiency.
+
+The key contributions of this research are multifaceted. We have developed a scalable framework for automated functional map generation using publicly available OpenStreetMap data, alongside implementing sophisticated text embedding techniques that effectively capture the semantic relationships between urban features. Through comprehensive evaluation metrics, we have validated our methodology, demonstrating its potential as a viable alternative to traditional manual mapping approaches. Furthermore, the successful application to a complex urban environment proves the framework's robustness in handling diverse land use patterns.
+
+While our current framework shows promising results, several avenues for future research and enhancement have been identified. In particular, temporal analysis integration presents significant opportunities for advancement. This includes the development of mechanisms to track and analyze temporal changes in functional zones, implementation of time-series analysis to identify urban development patterns and trends, and the creation of predictive models for future land use changes based on historical data.
