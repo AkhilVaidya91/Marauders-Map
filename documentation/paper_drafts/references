@@ -1,0 +1,28 @@
+https://www.sciencedirect.com/science/article/abs/pii/S003442572100198X --> functional maps
+https://www.tandfonline.com/doi/full/10.1080/10095020.2023.2264342#abstract --> town planning
+
+text clustering
+
+https://ieeexplore.ieee.org/document/10533963
+https://ieeexplore.ieee.org/document/10767494
+https://ieeexplore.ieee.org/document/10597898
+https://ieeexplore.ieee.org/document/10548815
+
+openstreetmap
+
+https://ieeexplore.ieee.org/document/8852877
+
+ @misc{OpenStreetMap,
+   author = {{OpenStreetMap contributors}},
+   title = {{Planet dump retrieved from https://planet.osm.org }},
+   howpublished = "\url{ https://www.openstreetmap.org }",
+   year = {2017},
+ }
+
+text embedding
+https://ieeexplore.ieee.org/document/10098736
+
+NLTK
+[NLTK: The Natural Language Toolkit](https://aclanthology.org/P04-3031/) (Bird & Loper, ACL 2004)
+https://ieeexplore.ieee.org/document/10134668
+
