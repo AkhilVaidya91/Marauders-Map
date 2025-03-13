@@ -49,6 +49,4 @@ Machine learning models used for text classification, including:
 
 - USE (Universal Sentence Encoder)
 - BERT (Bidirectional Encoder Representations from Transformers)
-- XGBoost
-- LSTM (Long Short-Term Memory networks)
-- Llama 3.2
+- Sentence Transformer
